@@ -6,6 +6,9 @@ import 'routes.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
+    // this will be used to pass data between screens
+    final arguments = settings.arguments;
+
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
