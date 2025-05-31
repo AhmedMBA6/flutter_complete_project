@@ -9,12 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
-          java-version: '11'
           distribution: 'temurin'
 
       - name: Install Flutter
@@ -32,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: bundle install
         working-directory: android
+
+      - name: Get Flutter Dependencies
+        run: flutter pub get
 
       - name: Run Fastlane App Distribution
         env:
