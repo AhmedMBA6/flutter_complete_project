@@ -18,6 +18,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    // Suppress -Xlint warnings
+    tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ["-Xlint:-options"]
+    }
+
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
