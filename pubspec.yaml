@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.1+1
+version: 1.0.2+1
 
 environment:
-  sdk: ^3.6.0-334.4.beta
+  sdk: ^3.7.0-0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -52,8 +52,10 @@ dependencies:
   retrofit_generator: ^9.2.0
   pretty_dio_logger: ^1.4.0
   # Localization.
+  flutter_localizations:
+    sdk: flutter
   intl: ^0.19.0
-  easy_localization: ^3.0.0
+  easy_localization: ^3.0.7+1
   # Splash screen.
   flutter_native_splash: ^2.4.4
   # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics.
