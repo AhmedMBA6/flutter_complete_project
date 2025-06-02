@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/doctors_container.dart';
 import 'widgets/home_top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,7 +16,10 @@ class HomeScreen extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [HomeTopBar()],
+            children: [
+              HomeTopBar(),
+              DoctorsContainer(),
+              ],
           ),
         ),
       ),
