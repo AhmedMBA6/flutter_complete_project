@@ -1,12 +1,15 @@
 plugins {
     id "com.android.application"
     // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
+    // id 'com.google.gms.google-services'
     // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+if (gradle.startParameter.taskNames.any { it.toLowerCase().contains("production") }) {
+        id 'com.google.gms.google-services'
+    }
 
 android {
     namespace = "com.example.flutter_complete_project"
