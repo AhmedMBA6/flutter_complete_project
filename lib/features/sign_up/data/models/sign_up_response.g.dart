@@ -9,9 +9,10 @@ part of 'sign_up_response.dart';
 SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) =>
     SignUpResponse(
       message: json['message'] as String?,
-      userData: json['data'] == null
-          ? null
-          : UserData.fromJson(json['data'] as Map<String, dynamic>),
+      userData:
+          json['data'] == null
+              ? null
+              : UserData.fromJson(json['data'] as Map<String, dynamic>),
       code: (json['code'] as num?)?.toInt(),
       status: json['status'] as bool?,
     );
@@ -25,11 +26,11 @@ Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
     };
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
-      userName: json['username'] as String?,
-      token: json['token'] as String?,
-    );
+  userName: json['username'] as String?,
+  token: json['token'] as String?,
+);
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
-      'username': instance.userName,
-      'token': instance.token,
-    };
+  'username': instance.userName,
+  'token': instance.token,
+};

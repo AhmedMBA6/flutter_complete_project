@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_complete_project/features/home/data/models/specializations_response_model.dart';
 import 'package:flutter_complete_project/features/login/data/models/login_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -21,4 +22,7 @@ abstract class ApiService {
   Future<SignUpResponse> signup(
     @Body() SignupRequestBody signupRequestBody,
   );
+
+  @GET(ApiConstants.specializationEndpoint)
+  Future<SpecializationsResponseModel> getSpecializations();
 }
