@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_complete_project/core/routing/app_router.dart';
 import 'package:flutter_complete_project/core/routing/routes.dart';
 import 'package:flutter_complete_project/core/theming/app_colors.dart';
+import 'package:flutter_complete_project/main_development.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/helpers/constants.dart';
 
 class DocApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -23,7 +26,7 @@ class DocApp extends StatelessWidget {
           useMaterial3: true,
         ),
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: isUserLoggedIn ? Routes.homeScreen : Routes.loginScreen,
       ),
     );
   }

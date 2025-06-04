@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_complete_project/core/helpers/constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../helpers/shared_preference_helper.dart';
 
 class DioFactory {
   /// private constructor as I don't want to allow creating an instance of this class
@@ -7,7 +10,7 @@ class DioFactory {
 
   static Dio? dio;
 
-  static Dio getDio() {
+  static Future<Dio> getDio() async {
     Duration timeout = const Duration(seconds: 30);
     if (dio == null) {
       dio = Dio();
@@ -15,19 +18,30 @@ class DioFactory {
       dio!.options.receiveTimeout = timeout;
 
       addDioInterceptors();
-      addDioHeaders();
-      return dio!;
-    } else {
+      await addDioHeaders();
       return dio!;
     }
+
+    return dio!;
   }
 
-  static void addDioHeaders() {
+  static Future<void> addDioHeaders() async {
+    final token = await SharedPreferenceHelper.getSecuredString(SharedPreferenceKeys.userToken);
+    dio?.options.headers.clear();
     dio?.options.headers.addAll({
       'Accept': 'application/json',
-      'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZjYXJlLmludGVncmF0aW9uMjUuY29tL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQ4OTg2ODA2LCJleHAiOjE3NDkwNzMyMDYsIm5iZiI6MTc0ODk4NjgwNiwianRpIjoiVDFIR1lGZEltNTZvTmpuciIsInN1YiI6IjQwMjkiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.RyVswAYTqz45rzANYo7ohq-hmlnGqBfYTRYN8XpePRI',
+      'Authorization': 'Bearer $token',
     });
+
+    // dio?.options.headers.addAll({
+    //   'Accept': 'application/json',
+    //   'Authorization':
+    //       'Bearer ${await SharedPreferenceHelper.getString(SharedPreferenceKeys.userToken)}',
+    // });
+  }
+
+   static void updateAuthorizationHeader(String token) {
+    dio?.options.headers['Authorization'] = 'Bearer $token';
   }
 
   static void addDioInterceptors() {
