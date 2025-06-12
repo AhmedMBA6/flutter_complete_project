@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_complete_project/core/helpers/extensions.dart';
+import 'package:flutter_complete_project/core/networking/api_error_model.dart';
 import 'package:flutter_complete_project/core/routing/routes.dart';
 import 'package:flutter_complete_project/core/theming/styles.dart';
 import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
@@ -14,27 +15,32 @@ class LoginBlocListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+      listenWhen:
+          (previous, current) =>
+              // current is LoginLoading ||
+              current is LoginSuccess || current is LoginError,
       listener: (context, state) {
         switch (state) {
-          case Loading():
+          case LoginLoading():
             // Show a loading indicator
             showDialog(
-                context: context,
-                builder: (context) => const Center(
-                        child: CircularProgressIndicator(
+              context: context,
+              builder:
+                  (context) => const Center(
+                    child: CircularProgressIndicator(
                       color: ColorsManager.primaryColor,
-                    )));
+                    ),
+                  ),
+            );
             break;
-          case Success():
+          case LoginSuccess():
             // Navigate to the home screen
             context.pop();
             context.pushNamed(Routes.homeScreen);
             break;
-          case Error(:final error):
-            // Show an error message
-            setupErrorState(context, error);
+          case LoginError(:final apiErrorModel):
+            // context.pop();
+            setupErrorState(context, apiErrorModel);
             break;
         }
       },
@@ -42,28 +48,23 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    context.pop(); // Close the loading dialog
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          icon: const Icon(
-            Icons.error,
-            color: Colors.red,
-            size: 32,
-          ),
+          icon: const Icon(Icons.error, color: Colors.red, size: 32),
           content: Text(
-            error,
+            apiErrorModel.errors != null || apiErrorModel.errors!.isNotEmpty
+                ? apiErrorModel.message ??
+                    "Unknown error occurred, Check your email & password and Try again!"
+                : apiErrorModel.getAllErrorMessages(),
             style: TextStyles.font15DarkBlueMedium,
           ),
           actions: [
             TextButton(
               onPressed: () => context.pop(),
-              child: Text(
-                'Got it',
-                style: TextStyles.font14BlueSemiBold,
-              ),
+              child: Text('Got it', style: TextStyles.font14BlueSemiBold),
             ),
           ],
         );

@@ -1,3 +1,4 @@
+import 'package:flutter_complete_project/core/networking/api_error_handler.dart';
 import 'package:flutter_complete_project/core/networking/api_result.dart';
 import 'package:flutter_complete_project/core/networking/api_service.dart';
 
@@ -12,8 +13,8 @@ class LoginRepo {
     try {
       final response = await _apiService.login(loginRequestBody);
       return ApiResult.success(response);
-    } catch (e) {
-      throw ApiResult.failure(e.toString());
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
 }
