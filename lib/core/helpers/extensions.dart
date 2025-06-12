@@ -35,3 +35,7 @@ extension StringExtension on String? {
 extension ListExtension<T> on List<T>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
 }
+
+extension MapExtension<T, V> on Map<T, V>? {
+  bool isNullOrEmpty() => this == null || this!.isEmpty;
+}

@@ -21,7 +21,7 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
 
   void emitLoginStates() async {
-    emit(const LoginState.loading());
+    emit(const LoginState.loginLoading());
     final response = await _loginRepo.login(
       LoginRequestBody(
         email: emailController.text,
@@ -34,21 +34,12 @@ class LoginCubit extends Cubit<LoginState> {
         final token = loginResponse.userData?.token ?? '';
         await saveUserToken(loginResponse.userData?.token ?? '');
         DioFactory.updateAuthorizationHeader(token);
-        emit(LoginState.success(loginResponse));
+        emit(LoginState.loginSuccess(loginResponse));
         break;
-      case ApiFailure():
-        final error = (response as ApiFailure).error;
-        emit(LoginState.error(error: error.toString()));
+      case ApiFailure(:final apiErrorModel):
+        emit(LoginState.loginError(apiErrorModel));
         break;
     }
-    //  if (response is ApiSuccess<LoginResponse>) {
-    //   final loginResponse = response.data;
-    //   await saveUserToken(loginResponse.userData?.token ?? '');
-    //   emit(LoginState.success(loginResponse));
-    // } else if (response is ApiFailure) {
-    //   final error = response.error;
-    //   emit(LoginState.error(error: error.toString()));
-    // }
   }
 
   Future<void> saveUserToken(String token) async {

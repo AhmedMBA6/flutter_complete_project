@@ -30,7 +30,7 @@ class SpecialityListViewItem extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: CircleAvatar(
-                  radius: 28.0,
+                  radius: 30.0,
                   backgroundColor: ColorsManager.lightBlue,
                   child: Image.asset(
                     'assets/images/general_speciality.png',

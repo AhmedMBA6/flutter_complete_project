@@ -184,10 +184,10 @@ as List<SpecializationsData?>?,
 
 
 class SpecializationsError implements HomeState {
-  const SpecializationsError(this.message);
+  const SpecializationsError(this.apiErrorModel);
   
 
- final  String message;
+ final  ApiErrorModel apiErrorModel;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -199,16 +199,16 @@ $SpecializationsErrorCopyWith<SpecializationsError> get copyWith => _$Specializa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SpecializationsError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SpecializationsError&&(identical(other.apiErrorModel, apiErrorModel) || other.apiErrorModel == apiErrorModel));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,apiErrorModel);
 
 @override
 String toString() {
-  return 'HomeState.specializationsError(message: $message)';
+  return 'HomeState.specializationsError(apiErrorModel: $apiErrorModel)';
 }
 
 
@@ -219,7 +219,7 @@ abstract mixin class $SpecializationsErrorCopyWith<$Res> implements $HomeStateCo
   factory $SpecializationsErrorCopyWith(SpecializationsError value, $Res Function(SpecializationsError) _then) = _$SpecializationsErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ ApiErrorModel apiErrorModel
 });
 
 
@@ -236,10 +236,10 @@ class _$SpecializationsErrorCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? apiErrorModel = null,}) {
   return _then(SpecializationsError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == apiErrorModel ? _self.apiErrorModel : apiErrorModel // ignore: cast_nullable_to_non_nullable
+as ApiErrorModel,
   ));
 }
 
@@ -324,66 +324,32 @@ as List<Doctors?>?,
 
 
 class DoctorsError implements HomeState {
-  const DoctorsError(this.message);
+  const DoctorsError();
   
 
- final  String message;
 
-/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$DoctorsErrorCopyWith<DoctorsError> get copyWith => _$DoctorsErrorCopyWithImpl<DoctorsError>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoctorsError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoctorsError);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeState.doctorsError(message: $message)';
+  return 'HomeState.doctorsError()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class $DoctorsErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory $DoctorsErrorCopyWith(DoctorsError value, $Res Function(DoctorsError) _then) = _$DoctorsErrorCopyWithImpl;
-@useResult
-$Res call({
- String message
-});
 
 
-
-
-}
-/// @nodoc
-class _$DoctorsErrorCopyWithImpl<$Res>
-    implements $DoctorsErrorCopyWith<$Res> {
-  _$DoctorsErrorCopyWithImpl(this._self, this._then);
-
-  final DoctorsError _self;
-  final $Res Function(DoctorsError) _then;
-
-/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
-  return _then(DoctorsError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
 
 // dart format on
