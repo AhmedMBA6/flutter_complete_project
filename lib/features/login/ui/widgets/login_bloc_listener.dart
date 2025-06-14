@@ -34,9 +34,9 @@ class LoginBlocListener extends StatelessWidget {
             );
             break;
           case LoginSuccess():
-            // Navigate to the home screen
+            // Navigate to the main app bottom nav bar
             context.pop();
-            context.pushNamed(Routes.homeScreen);
+            context.pushNamed(Routes.appBottomNavBar);
             break;
           case LoginError(:final apiErrorModel):
             // context.pop();
